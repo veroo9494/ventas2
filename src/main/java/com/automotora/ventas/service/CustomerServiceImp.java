@@ -1,7 +1,10 @@
 package com.automotora.ventas.service;
 
-import com.automotora.ventas.DAO.CustomerRepository;
+import com.automotora.ventas.DTO.DTOCustomer;
+import com.automotora.ventas.repository.CustomerRepository;
 import com.automotora.ventas.entities.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,12 +29,26 @@ public class CustomerServiceImp implements CustomerService {
         */
         Iterable<Customer> all = customerRepository.findAll();
         List<Customer> customerList = new ArrayList<Customer>();
-        for(Customer customer: all){
+        for (Customer customer : all) {
             customerList.add(customer);
         }
         return customerList;
     }
 
+    @Override
+    public String addCustomer(DTOCustomer dtoCustomer) {
+        try {
+            Customer customer = new Customer(dtoCustomer.getName(), dtoCustomer.getEmail());
+            customerRepository.save(customer);
+            return "Customer added";
+        } catch (Exception e) {
+           // System.out.print("ERROR");
+        }
+        return "No se guardo";
+    }
+
+    // CommandLineRunner commandLineRunner =
+    //}
 
 
 }
