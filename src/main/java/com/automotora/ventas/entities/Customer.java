@@ -1,9 +1,17 @@
-package com.automotora.ventas.models;
+package com.automotora.ventas.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "customer")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    private int id;
+    @Column
     private String name;
+    @Column
     private String email;
 
     public Customer() {

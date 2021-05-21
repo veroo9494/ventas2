@@ -1,10 +1,10 @@
 package com.automotora.ventas.service;
 
-import com.automotora.ventas.models.Customer;
+import com.automotora.ventas.entities.Customer;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CustomerService {
 
-    ArrayList<Customer> getCustomers();
+    List<Customer> getCustomers();
 }

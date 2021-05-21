@@ -1,12 +1,10 @@
 package com.automotora.ventas.rest.controller;
 
-import com.automotora.ventas.models.Customer;
+import com.automotora.ventas.entities.Customer;
 import com.automotora.ventas.service.CustomerService;
-import com.automotora.ventas.service.HomeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +19,7 @@ public class CustomerController {
 
 
     @GetMapping(path)
-    public ArrayList<Customer> getCustomers() {
+    public List<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
