@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer idCustomer;
 
     @Column
     private String name;
@@ -22,18 +22,12 @@ public class Customer {
         this.email = email;
     }
 
-    public Customer(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
-
     public int getId() {
-        return id;
+        return idCustomer;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public String getName() {
@@ -55,7 +49,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "idCustomer=" + idCustomer +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';

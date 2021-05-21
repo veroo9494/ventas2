@@ -38,11 +38,12 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public String addCustomer(DTOCustomer dtoCustomer) {
         try {
+            //mapstruck
             Customer customer = new Customer(dtoCustomer.getName(), dtoCustomer.getEmail());
             customerRepository.save(customer);
             return "Customer added";
         } catch (Exception e) {
-           // System.out.print("ERROR");
+            System.out.print(e.getStackTrace());
         }
         return "No se guardo";
     }

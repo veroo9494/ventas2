@@ -15,20 +15,16 @@ public class CustomerController {
     private CustomerService customerService;
     private static final String getCustomersPath = "/customers";
     private static final String newCustomerPath = "/newcustomer";
+
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    //@RequestMapping(newCustomerPath)
-    @RequestMapping(newCustomerPath)
+    @GetMapping(newCustomerPath)
     public String addCustomer(@RequestParam("name") String name, @RequestParam("email") String email){
-       //String s = @RequestParam(value = "name");
         DTOCustomer dtoCustomer = new DTOCustomer(name,email );
-      //  dtoCustomer.setName(@RequestParam("name"));
-     //   ModelMap model) {
         return customerService.addCustomer(dtoCustomer);
     }
-
 
     @GetMapping(getCustomersPath)
     public List<Customer> getCustomers() {
