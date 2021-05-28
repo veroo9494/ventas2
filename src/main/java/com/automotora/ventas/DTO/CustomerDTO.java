@@ -1,24 +1,25 @@
 package com.automotora.ventas.DTO;
 
-public class DTOCustomer {
-    private Integer id;
+public class CustomerDTO {
+    private Integer idCustomer;
     private String name;
     private String email;
 
-    public DTOCustomer() {
+    public CustomerDTO() {
     }
 
-    public DTOCustomer(String name, String email) {
+    public CustomerDTO(Integer idCustomer, String name, String email) {
+        this.idCustomer = idCustomer;
         this.name = name;
         this.email = email;
     }
 
     public Integer getId() {
-        return id;
+        return idCustomer;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public String getName() {
