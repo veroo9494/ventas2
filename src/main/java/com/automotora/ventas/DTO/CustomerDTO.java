@@ -14,11 +14,11 @@ public class CustomerDTO {
         this.email = email;
     }
 
-    public Integer getId() {
+    public Integer getIdCustomer() {
         return idCustomer;
     }
 
-    public void setId(Integer idCustomer) {
+    public void setIdCustomer(Integer idCustomer) {
         this.idCustomer = idCustomer;
     }
 

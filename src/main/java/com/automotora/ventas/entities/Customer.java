@@ -17,6 +17,12 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(Integer idCustomer, String name, String email) {
+        this.idCustomer = idCustomer;
+        this.name = name;
+        this.email = email;
+    }
+
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;

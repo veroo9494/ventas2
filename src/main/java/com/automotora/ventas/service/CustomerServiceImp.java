@@ -1,6 +1,9 @@
 package com.automotora.ventas.service;
 
 import com.automotora.ventas.DTO.CustomerDTO;
+import com.automotora.ventas.DTO.FieldErrorDTO;
+import com.automotora.ventas.DTO.ResultDTO;
+import com.automotora.ventas.ENUM.Result;
 import com.automotora.ventas.repository.CustomerRepository;
 import com.automotora.ventas.entities.Customer;
 import org.springframework.stereotype.Service;
@@ -48,7 +51,7 @@ public class CustomerServiceImp implements CustomerService {
 
     public String updateCustomer(CustomerDTO customerDTO) {
         try {
-            Customer customer =   customerRepository.findById(customerDTO.getId()).get();
+            Customer customer = customerRepository.findById(customerDTO.getIdCustomer()).get();
             customer.setName(customerDTO.getName());
             customer.setEmail(customerDTO.getEmail());
             customerRepository.save(customer);
@@ -59,19 +62,40 @@ public class CustomerServiceImp implements CustomerService {
         return "No se guardaron los cambios";
     }
 
-    public String deleteCustomer(CustomerDTO customerDTO){
-        try{
-            customerRepository.deleteById(customerDTO.getId());
-            return "OK";
-        } catch (Exception ex){
-            System.out.print("EXCEPCION");
+    public ResultDTO deleteCustomer(CustomerDTO customerDTO) {
+        ResultDTO resultDTO = new ResultDTO();
+        try {
+            Customer customer = toCustomer(customerDTO);
+            if (validateCustomer(resultDTO, customerDTO,false)) {
+                customerRepository.deleteById(customer.getId());
+                resultDTO.setResult(Result.SUCCESS);
+                resultDTO.setMsg("Customer deleted successfully");
+            }
+
+        } catch (Exception ex) {
+            resultDTO.setResult(Result.ERROR);
+            resultDTO.setMsg("ERROR COULD BE CONTROLLED");
         }
-        return "NO SE PUDO ELIMINAR";
+    return resultDTO;
     }
 
-    public Customer toCustomer(CustomerDTO customerDTO){
-        Customer customer = new Customer(customerDTO.getName(), customerDTO.getEmail());
+    public Customer toCustomer(CustomerDTO customerDTO) {
+        Customer customer = new Customer(customerDTO.getIdCustomer(), customerDTO.getName(), customerDTO.getEmail());
         return customer;
+    }
+
+    public boolean validateCustomer(ResultDTO resultDTO, CustomerDTO customerDTO, boolean isNew){
+        boolean rest = true;
+        if(!isNew) {
+            if (customerRepository.findById(customerDTO.getIdCustomer()).isEmpty()) {
+                FieldErrorDTO fieldErrorDTO = new FieldErrorDTO("CUSTOMER ID", "DOESN'T EXIST");
+                resultDTO.addError(fieldErrorDTO);
+                rest = false;
+            }
+        }else{
+           rest = true;
+        }
+        return rest;
     }
 
 }

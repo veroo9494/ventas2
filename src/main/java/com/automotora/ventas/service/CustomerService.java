@@ -1,6 +1,7 @@
 package com.automotora.ventas.service;
 
 import com.automotora.ventas.DTO.CustomerDTO;
+import com.automotora.ventas.DTO.ResultDTO;
 import com.automotora.ventas.entities.Customer;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface CustomerService {
 
     List<Customer> getCustomers();
 
-    String deleteCustomer(CustomerDTO customerDTO);
+    ResultDTO deleteCustomer(CustomerDTO customerDTO);
 }
