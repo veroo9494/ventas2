@@ -1,6 +1,7 @@
 package com.automotora.ventas.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -13,6 +14,9 @@ public class Customer {
     private String name;
     @Column
     private String email;
+
+    @OneToMany(mappedBy="customer")
+    private Set<Vehicle> vehicles;
 
     public Customer() {
     }
@@ -50,6 +54,22 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(Integer idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     @Override

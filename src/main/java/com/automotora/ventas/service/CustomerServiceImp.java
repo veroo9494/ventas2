@@ -6,6 +6,7 @@ import com.automotora.ventas.DTO.ResultDTO;
 import com.automotora.ventas.ENUM.Result;
 import com.automotora.ventas.repository.CustomerRepository;
 import com.automotora.ventas.entities.Customer;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public String addCustomer(CustomerDTO customerDTO) {
         try {
-            //mapstruck
+            //mapstruct
             Customer customer = toCustomer(customerDTO);
             customerRepository.save(customer);
             return "Customer added";
@@ -65,16 +66,15 @@ public class CustomerServiceImp implements CustomerService {
     public ResultDTO deleteCustomer(CustomerDTO customerDTO) {
         ResultDTO resultDTO = new ResultDTO();
         try {
-            Customer customer = toCustomer(customerDTO);
             if (validateCustomer(resultDTO, customerDTO,false)) {
+                Customer customer = toCustomer(customerDTO);
                 customerRepository.deleteById(customer.getId());
                 resultDTO.setResult(Result.SUCCESS);
                 resultDTO.setMsg("Customer deleted successfully");
             }
-
         } catch (Exception ex) {
             resultDTO.setResult(Result.ERROR);
-            resultDTO.setMsg("ERROR COULD BE CONTROLLED");
+            resultDTO.setMsg("UNCONTROLLED ERROR");
         }
     return resultDTO;
     }
@@ -84,6 +84,7 @@ public class CustomerServiceImp implements CustomerService {
         return customer;
     }
 
+    @Query("SELECT id_customer FROM customer WHERE name = ?2")
     public boolean validateCustomer(ResultDTO resultDTO, CustomerDTO customerDTO, boolean isNew){
         boolean rest = true;
         if(!isNew) {

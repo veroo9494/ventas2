@@ -2,14 +2,14 @@ package com.automotora.ventas.DTO;
 
 public class FieldErrorDTO {
     private String property;
-    private  String messege;
+    private  String msg;
 
     public FieldErrorDTO() {
     }
 
     public FieldErrorDTO(String property, String messege) {
         this.property = property;
-        this.messege = messege;
+        this.msg = messege;
     }
 
     public String getProperty() {
@@ -20,11 +20,11 @@ public class FieldErrorDTO {
         this.property = property;
     }
 
-    public String getMessege() {
-        return messege;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessege(String messege) {
-        this.messege = messege;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
