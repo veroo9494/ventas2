@@ -15,4 +15,7 @@ public interface CustomerService {
     List<Customer> getCustomers();
 
     ResultDTO deleteCustomer(CustomerDTO customerDTO);
+
+    Customer getCustomer(Integer idCustomer);
+
 }

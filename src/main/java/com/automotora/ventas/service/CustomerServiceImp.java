@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
@@ -66,7 +67,7 @@ public class CustomerServiceImp implements CustomerService {
     public ResultDTO deleteCustomer(CustomerDTO customerDTO) {
         ResultDTO resultDTO = new ResultDTO();
         try {
-            if (validateCustomer(resultDTO, customerDTO,false)) {
+            if (validateCustomer(resultDTO, customerDTO, false)) {
                 Customer customer = toCustomer(customerDTO);
                 customerRepository.deleteById(customer.getId());
                 resultDTO.setResult(Result.SUCCESS);
@@ -76,7 +77,7 @@ public class CustomerServiceImp implements CustomerService {
             resultDTO.setResult(Result.ERROR);
             resultDTO.setMsg("UNCONTROLLED ERROR");
         }
-    return resultDTO;
+        return resultDTO;
     }
 
     public Customer toCustomer(CustomerDTO customerDTO) {
@@ -85,18 +86,28 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Query("SELECT id_customer FROM customer WHERE name = ?2")
-    public boolean validateCustomer(ResultDTO resultDTO, CustomerDTO customerDTO, boolean isNew){
+    public boolean validateCustomer(ResultDTO resultDTO, CustomerDTO customerDTO, boolean isNew) {
         boolean rest = true;
-        if(!isNew) {
+        if (!isNew) {
             if (customerRepository.findById(customerDTO.getIdCustomer()).isEmpty()) {
                 FieldErrorDTO fieldErrorDTO = new FieldErrorDTO("CUSTOMER ID", "DOESN'T EXIST");
                 resultDTO.addError(fieldErrorDTO);
                 rest = false;
             }
-        }else{
-           rest = true;
+        } else {
+            rest = true;
         }
         return rest;
     }
+
+    @Override
+    public Customer getCustomer(Integer idCustomer) {
+        Optional<Customer> optCustomer = customerRepository.findById(idCustomer);
+        if (!optCustomer.isEmpty()) {
+            return optCustomer.get();
+        }
+        return new Customer();
+    }
+
 
 }

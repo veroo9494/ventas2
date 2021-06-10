@@ -4,9 +4,7 @@ import com.automotora.ventas.DTO.ResultDTO;
 import com.automotora.ventas.DTO.VehicleDTO;
 import com.automotora.ventas.service.VehicleService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class VehicleController {
@@ -19,10 +17,11 @@ public class VehicleController {
     }
 
     @PostMapping(path = vehicles)
-    public ResponseEntity<ResultDTO> addVehicle(VehicleDTO vehicleDTO) {
-
-        return vehicleService.addVehicle(vehicleDTO);
+    public ResponseEntity<VehicleDTO> addVehicle(@RequestBody VehicleDTO vehicleDTO) {
+        return ResponseEntity.ok(vehicleService.addVehicle(vehicleDTO));
     }
 
+    //@GetMapping(path = vehicles)
+   // public VehicleDTO getVehicleByCustomer(@RequestParam )
 
 }

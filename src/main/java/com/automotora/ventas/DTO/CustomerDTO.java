@@ -1,9 +1,12 @@
 package com.automotora.ventas.DTO;
 
+import java.util.ArrayList;
+
 public class CustomerDTO {
     private Integer idCustomer;
     private String name;
     private String email;
+    private ArrayList<VehicleDTO> vehicles;
 
     public CustomerDTO() {
     }
@@ -36,5 +39,13 @@ public class CustomerDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<VehicleDTO> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ArrayList<VehicleDTO> vehicles) {
+        this.vehicles = vehicles;
     }
 }

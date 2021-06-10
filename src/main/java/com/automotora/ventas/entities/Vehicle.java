@@ -22,9 +22,10 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String model) {
+    public Vehicle(String brand, String model, Customer customer) {
         this.brand = brand;
         this.model = model;
+        this.customer = customer;
     }
 
     public Integer getIdVehicle() {
